@@ -2,10 +2,15 @@ package com.chat.tutorial.v1.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chat.tutorial.v1.databinding.ActivitySignInBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -22,6 +27,23 @@ public class SignInActivity extends AppCompatActivity {
     private void setListeners() {
         binding.textCreateNewAccount.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
+        binding.buttonSignIn.setOnClickListener(v -> addDataToFirestore());
+    }
+
+    private void addDataToFirestore() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        Map<String, Object> data = new HashMap<>();
+        data.put("first_name", "Vlad");
+        data.put("last_name", "Lysanov");
+        database.collection("users")
+                .add(data)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(getApplicationContext(), "Data inserted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                );
     }
 
 }
