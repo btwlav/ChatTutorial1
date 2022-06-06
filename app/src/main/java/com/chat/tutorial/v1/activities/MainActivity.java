@@ -55,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
                         preferenceManager.getString(Constants.KEY_USER_ID)
                 );
         documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                //.addOnSuccessListener(unused -> showToast("Токен успешно обновлен"))
+                .addOnSuccessListener(unused -> showToast("Токен успешно обновлен"))
                 .addOnFailureListener(e -> showToast("Не получилось обновить токен"));
     }
 
     private void loadUserDetails() {
-//        binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME));
-//        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
-//        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//        binding.imageProfile.setImageBitmap(bitmap);
+        binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME));
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        binding.imageProfile.setImageBitmap(bitmap);
     }
 
     private void showToast(String message) {
