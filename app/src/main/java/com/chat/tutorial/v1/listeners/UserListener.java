@@ -1,4 +1,4 @@
-package com.chat.tutorial.v1.Listeners;
+package com.chat.tutorial.v1.listeners;
 
 import com.chat.tutorial.v1.models.User;
 

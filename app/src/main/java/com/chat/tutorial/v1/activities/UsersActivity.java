@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.chat.tutorial.v1.Listeners.UserListener;
+import com.chat.tutorial.v1.listeners.UserListener;
 import com.chat.tutorial.v1.adapters.UserAdapter;
 import com.chat.tutorial.v1.databinding.ActivityUsersBinding;
 import com.chat.tutorial.v1.models.User;

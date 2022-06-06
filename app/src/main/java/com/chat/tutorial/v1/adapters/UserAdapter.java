@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chat.tutorial.v1.Listeners.UserListener;
+import com.chat.tutorial.v1.listeners.UserListener;
 import com.chat.tutorial.v1.databinding.ItemContainerUserBinding;
 import com.chat.tutorial.v1.models.User;
 
