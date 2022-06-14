@@ -12,4 +12,5 @@
     <string name="sign_up">Зарегистрироваться</string>
     <string name="select_user">Выберите пользователя</string>
     <string name="type_a_message">Введите сообщение</string>
+    <string name="type_username">Введите имя пользователя</string>
 </resources>

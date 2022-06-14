@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.chat.tutorial.v1.listeners.UserListener;
@@ -34,6 +36,28 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
 
     private void setListeners() {
         binding.imageBack.setOnClickListener(v -> onBackPressed());
+        binding.imageSearch.setOnClickListener(v -> {
+            searchByName(true);
+//            if (!binding.searchUser.getText().toString().trim().isEmpty() && !binding.searchUser.getText().toString().equals("")) {
+//                getUsers();
+//            }
+        });
+        binding.searchUser.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                getUsers();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void getUsers() {
@@ -48,13 +72,17 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                         ArrayList<User> users = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                             if (currentUserId.equals(queryDocumentSnapshot.getId())) continue;
-                            User user = new User();
-                            user.name = queryDocumentSnapshot.getString(Constants.KEY_NAME);
-                            user.email = queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
-                            user.image = queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
-                            user.token = queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
-                            user.id = queryDocumentSnapshot.getId();
-                            users.add(user);
+//                            binding.searchUser.getText().toString();
+                            if (queryDocumentSnapshot.getString(Constants.KEY_NAME).contains(binding.searchUser.getText().toString())) {
+                                User user = new User();
+                                user.name = queryDocumentSnapshot.getString(Constants.KEY_NAME);
+                                user.email = queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
+                                user.image = queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
+                                user.token = queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                                user.id = queryDocumentSnapshot.getId();
+                                users.add(user);
+                            }
+
                         }
                         if (users.size() > 0) {
                             UserAdapter userAdapter = new UserAdapter(users, this);
@@ -63,6 +91,16 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                         } else showErrorMessage();
                     } else showErrorMessage();
                 });
+    }
+
+    private void searchByName(Boolean byName) {
+        if (byName) {
+            binding.imageSearch.setVisibility(View.INVISIBLE);
+            binding.searchUser.setVisibility(View.VISIBLE);
+        } else {
+            binding.imageSearch.setVisibility(View.VISIBLE);
+            binding.searchUser.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void showErrorMessage() {

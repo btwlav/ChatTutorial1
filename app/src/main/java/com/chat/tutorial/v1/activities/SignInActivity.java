@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         loading(false);
-                        showToast("Не получается войти");
+                        showToast("Не удалось выполнить вход.");
                     }
                 });
     }
@@ -79,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
     private Boolean isValidSignInDetails() {
