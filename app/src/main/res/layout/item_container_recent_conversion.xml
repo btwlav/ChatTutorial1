@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/_8sdp">
 
@@ -13,6 +13,17 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/availabilityIndicator"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/availability_indicator"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/imageProfile"
+        app:layout_constraintBottom_toBottomOf="@id/imageProfile"
         app:riv_oval="true"/>
 
     <View

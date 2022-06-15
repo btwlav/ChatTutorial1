@@ -7,12 +7,13 @@
         <entry key="..\:/4is1/Android/ChatTutorial1/app/src/main/res/layout/item_container_received_message.xml" value="0.371875" />
         <entry key="..\:/4is1/Android/ChatTutorial1/app/src/main/res/layout/item_container_sent_message.xml" value="0.371875" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
+        <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/availability_indicator.xml" value="0.25" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_char_input.xml" value="0.2595" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_char_search_user_input.xml" value="0.332" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_content_bottom.xml" value="0.2595" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_content_top.xml" value="0.2595" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_icon.xml" value="0.2215" />
-        <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_image.xml" value="0.1" />
+        <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_image.xml" value="0.332" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_input.xml" value="0.1385" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_received_message.xml" value="0.26" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/drawable/background_sent_message.xml" value="0.26" />
@@ -27,6 +28,7 @@
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/activity_users.xml" value="0.371875" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/item_container_received_message.xml" value="0.371875" />
+        <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/item_container_recent_conversion.xml" value="0.371875" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/item_container_sent_message.xml" value="0.371875" />
         <entry key="..\:/4is1/vlad/Android/ChatTutorial1/app/src/main/res/layout/item_container_user.xml" value="0.371875" />
         <entry key="..\:/Users/123/Desktop/Studying/Android/ChatTutorial1/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
