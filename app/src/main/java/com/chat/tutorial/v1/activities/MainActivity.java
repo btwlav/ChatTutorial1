@@ -2,6 +2,7 @@ package com.chat.tutorial.v1.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,14 +31,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements ConversionListener {
+public class MainActivity extends BaseActivity implements ConversionListener {
 
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore database;
+    private Boolean isReceiverAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +73,11 @@ public class MainActivity extends AppCompatActivity implements ConversionListene
                 .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventLister);
         database.collection(Constants.KEY_COLLECTIONS_CONVERSATIONS)
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, preferenceManager.getString(Constants.KEY_RECEIVER_ID))
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventLister);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private final EventListener<QuerySnapshot> eventLister = (value, error) -> {
         if (error != null) {
             return;
@@ -168,4 +172,5 @@ public class MainActivity extends AppCompatActivity implements ConversionListene
         intent.putExtra(Constants.KEY_USER, user);
         startActivity(intent);
     }
+
 }
