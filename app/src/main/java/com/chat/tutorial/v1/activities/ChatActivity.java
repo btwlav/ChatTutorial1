@@ -70,7 +70,7 @@ public class ChatActivity extends BaseActivity {
         HashMap<String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
         message.put(Constants.KEY_RECEIVER_ID, receiverUser.id);
-        message.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString());
+        message.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString().trim());
         message.put(Constants.KEY_TIMESTAMP, new Date());
         database.collection(Constants.KEY_COLLECTION_CHAT).add(message);
         if (conversionID != null) {
@@ -83,7 +83,7 @@ public class ChatActivity extends BaseActivity {
             conversion.put(Constants.KEY_RECEIVER_ID, receiverUser.id);
             conversion.put(Constants.KEY_RECEIVER_NAME, receiverUser.name);
             conversion.put(Constants.KEY_RECEIVER_IMAGE, receiverUser.image);
-            conversion.put(Constants.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
+            conversion.put(Constants.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString().trim());
             conversion.put(Constants.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
         }
@@ -169,12 +169,17 @@ public class ChatActivity extends BaseActivity {
 
     private void setListeners() {
         binding.imageBack.setOnClickListener(v -> onBackPressed());
-        binding.layoutSend.setOnClickListener(v -> sendMessage());
+        binding.layoutSend.setOnClickListener(v -> {
+            if (!binding.inputMessage.getText().toString().trim().isEmpty()) {
+                sendMessage();
+            }
+        });
+//        binding.chatRecyclerView.setOnLongClickListener(deleteMessage());
 //        deleteConversion();
     }
 
     private String getReadableDateTime(Date date) {
-        return new SimpleDateFormat("MMMM dd, yyyy - hh:mm a", Locale.getDefault()).format(date);
+        return new SimpleDateFormat("MMMM dd, yyyy - hh:mm", new Locale("ru")).format(date);
     }
 
     private void addConversion(HashMap<String, Object> conversion) {
@@ -190,16 +195,17 @@ public class ChatActivity extends BaseActivity {
                 Constants.KEY_LAST_MESSAGE, message,
                 Constants.KEY_TIMESTAMP, new Date()
         );
+//        documentReference.delete();
     }
 
-//    private void deleteConversion(String senderID, String receiverID) {
-//        Task<QuerySnapshot> query = database.collection(Constants.KEY_COLLECTIONS_CONVERSATIONS)
-//                .whereEqualTo(Constants.KEY_SENDER_ID, senderID)
-//                .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverID)
-//                .get();
-//        database.collection(Constants.KEY_COLLECTIONS_CONVERSATIONS).document(conversionID)
-//                .delete();
-//    }
+    private void deleteMessage(String senderID, String receiverID) {
+        DocumentReference reference = database.collection(Constants.KEY_MESSAGE)
+                        .whereEqualTo(Constants.KEY_SENDER_ID, senderID)
+                                .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverID)
+                                        .getFirestore().document(preferenceManager.getString(Constants.KEY_MESSAGE));
+        reference.delete().addOnSuccessListener(success -> chatAdapter.notifyDataSetChanged());
+
+    }
 
     private void checkForConversion() {
         if (chatMessages.size() != 0) {

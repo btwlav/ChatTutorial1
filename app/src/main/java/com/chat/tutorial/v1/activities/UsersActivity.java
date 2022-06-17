@@ -38,9 +38,6 @@ public class UsersActivity extends BaseActivity implements UserListener {
         binding.imageBack.setOnClickListener(v -> onBackPressed());
         binding.imageSearch.setOnClickListener(v -> {
             searchByName(true);
-//            if (!binding.searchUser.getText().toString().trim().isEmpty() && !binding.searchUser.getText().toString().equals("")) {
-//                getUsers();
-//            }
         });
         binding.searchUser.addTextChangedListener(new TextWatcher() {
             @Override
@@ -72,7 +69,6 @@ public class UsersActivity extends BaseActivity implements UserListener {
                         ArrayList<User> users = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                             if (currentUserId.equals(queryDocumentSnapshot.getId())) continue;
-//                            binding.searchUser.getText().toString();
                             if (queryDocumentSnapshot.getString(Constants.KEY_NAME).contains(binding.searchUser.getText().toString())) {
                                 User user = new User();
                                 user.name = queryDocumentSnapshot.getString(Constants.KEY_NAME);
@@ -82,13 +78,17 @@ public class UsersActivity extends BaseActivity implements UserListener {
                                 user.id = queryDocumentSnapshot.getId();
                                 users.add(user);
                             }
-
                         }
                         if (users.size() > 0) {
                             UserAdapter userAdapter = new UserAdapter(users, this);
                             binding.usersRecyclerView.setAdapter(userAdapter);
                             binding.usersRecyclerView.setVisibility(View.VISIBLE);
-                        } else showErrorMessage();
+                            binding.textErrorMessage.setVisibility(View.GONE);
+                        } else {
+                            showErrorMessage();
+//                            binding.usersRecyclerView.setAdapter(new UserAdapter(null, this));
+                            binding.usersRecyclerView.setVisibility(View.GONE);
+                        }
                     } else showErrorMessage();
                 });
     }
