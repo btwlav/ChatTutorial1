@@ -132,9 +132,9 @@ public class MainActivity extends BaseActivity implements ConversionListener {
                 database.collection(Constants.KEY_COLLECTION_USERS).document(
                         preferenceManager.getString(Constants.KEY_USER_ID)
                 );
-        documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(unused -> showToast("Токен успешно обновлен"))
-                .addOnFailureListener(e -> showToast("Не получилось обновить токен"));
+        documentReference.update(Constants.KEY_FCM_TOKEN, token);
+//                .addOnSuccessListener(unused -> showToast("Токен успешно обновлен"))
+//                .addOnFailureListener(e -> showToast("Не получилось обновить токен"));
     }
 
     private void loadUserDetails() {

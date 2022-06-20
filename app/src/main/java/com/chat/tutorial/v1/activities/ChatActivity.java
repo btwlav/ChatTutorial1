@@ -1,5 +1,6 @@
 package com.chat.tutorial.v1.activities;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChatActivity extends BaseActivity {
@@ -67,7 +69,7 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void sendMessage() {
-        HashMap<String, Object> message = new HashMap<>();
+        Map<String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
         message.put(Constants.KEY_RECEIVER_ID, receiverUser.id);
         message.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString().trim());
@@ -91,24 +93,24 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void listenAvailabilityOfReceiver() {
-        database.collection(Constants.KEY_COLLECTION_USERS).document(
-                receiverUser.id
-        ).addSnapshotListener(ChatActivity.this, (value, error) -> {
-            if (error != null) return;
-            if (value != null) {
-                if (value.getLong(Constants.KEY_AVAILABILITY) != null) {
-                    int availability = Objects.requireNonNull(
-                            value.getLong(Constants.KEY_AVAILABILITY)
-                    ).intValue();
-                    isReceiverAvailable = availability == 1;
-                }
-            }
-            if (isReceiverAvailable) {
-                binding.availability.setText("онлайн");
-            } else {
-                binding.availability.setText("был когда-то");
-            }
-        });
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(receiverUser.id)
+                .addSnapshotListener(ChatActivity.this, (value, error) -> {
+                    if (error != null) return;
+                    if (value != null) {
+                        if (value.getLong(Constants.KEY_AVAILABILITY) != null) {
+                            int availability = Objects.requireNonNull(
+                                    value.getLong(Constants.KEY_AVAILABILITY)
+                            ).intValue();
+                            isReceiverAvailable = availability == 1;
+                        }
+                    }
+                    if (isReceiverAvailable) {
+                        binding.availability.setText("онлайн");
+                    } else {
+                        binding.availability.setText("был когда-то");
+                    }
+                });
     }
 
     private void listenMessages() {
@@ -198,13 +200,13 @@ public class ChatActivity extends BaseActivity {
 //        documentReference.delete();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void deleteMessage(String senderID, String receiverID) {
-        DocumentReference reference = database.collection(Constants.KEY_MESSAGE)
-                        .whereEqualTo(Constants.KEY_SENDER_ID, senderID)
-                                .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverID)
-                                        .getFirestore().document(preferenceManager.getString(Constants.KEY_MESSAGE));
-        reference.delete().addOnSuccessListener(success -> chatAdapter.notifyDataSetChanged());
-
+        database.collection(Constants.KEY_MESSAGE)
+                .whereEqualTo(Constants.KEY_SENDER_ID, senderID)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverID)
+                .getFirestore().document(preferenceManager.getString(Constants.KEY_MESSAGE))
+                .delete().addOnSuccessListener(success -> chatAdapter.notifyDataSetChanged());
     }
 
     private void checkForConversion() {
