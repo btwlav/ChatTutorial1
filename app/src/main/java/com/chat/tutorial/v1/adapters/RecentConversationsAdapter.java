@@ -16,7 +16,7 @@ import com.chat.tutorial.v1.models.User;
 
 import java.util.List;
 
-public class RecentConversationsAdapter  extends RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
+public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
 
     private final List<ChatMessage> chatMessages;
     private final ConversionListener conversionListener;
@@ -71,7 +71,7 @@ public class RecentConversationsAdapter  extends RecyclerView.Adapter<RecentConv
     }
 
     private Bitmap getConversionImage(String encodedImage) {
-        byte[] bytes  = Base64.decode(encodedImage, Base64.DEFAULT);
+        byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }

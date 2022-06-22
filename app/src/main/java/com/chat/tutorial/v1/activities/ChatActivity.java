@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.chat.tutorial.v1.adapters.ChatAdapter;
 import com.chat.tutorial.v1.databinding.ActivityChatBinding;
 import com.chat.tutorial.v1.models.ChatMessage;
@@ -16,7 +14,6 @@ import com.chat.tutorial.v1.models.User;
 import com.chat.tutorial.v1.utilities.Constants;
 import com.chat.tutorial.v1.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;

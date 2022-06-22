@@ -2,7 +2,6 @@ package com.chat.tutorial.v1.adapters;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

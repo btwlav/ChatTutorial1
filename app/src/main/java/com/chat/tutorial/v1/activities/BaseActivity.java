@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.chat.tutorial.v1.utilities.Constants;
 import com.chat.tutorial.v1.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BaseActivity extends AppCompatActivity {
